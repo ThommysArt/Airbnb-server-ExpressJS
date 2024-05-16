@@ -14,7 +14,8 @@ datasource db {
 }
 
 model User {
-  id        Int       @id
+  id        Int       @id @default(autoincrement())
+  authCode  String
   createdAt DateTime  @default(now())
   hosts     Host[]
   payments  Payment[]
