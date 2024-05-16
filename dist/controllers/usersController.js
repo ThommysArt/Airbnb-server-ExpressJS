@@ -9,7 +9,7 @@ const usersController = {
             res.json(users);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     getUserById: async (req, res) => {
@@ -24,7 +24,7 @@ const usersController = {
             res.json(user);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     createUser: async (req, res) => {
@@ -38,7 +38,7 @@ const usersController = {
             res.status(201).json(newUser);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     deleteUser: async (req, res) => {
@@ -50,7 +50,7 @@ const usersController = {
             res.json(deletedUser);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
 };

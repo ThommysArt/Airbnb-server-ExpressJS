@@ -9,7 +9,7 @@ const listingAmenitiesController = {
             res.json(listingAmenities);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     getListingAmenityById: async (req, res) => {
@@ -24,7 +24,7 @@ const listingAmenitiesController = {
             res.json(listingAmenity);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     createListingAmenity: async (req, res) => {
@@ -40,7 +40,7 @@ const listingAmenitiesController = {
             res.status(201).json(newListingAmenity);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     updateListingAmenity: async (req, res) => {
@@ -58,7 +58,7 @@ const listingAmenitiesController = {
             res.json(updatedListingAmenity);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     deleteListingAmenity: async (req, res) => {
@@ -70,7 +70,7 @@ const listingAmenitiesController = {
             res.json(deletedListingAmenity);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
 };

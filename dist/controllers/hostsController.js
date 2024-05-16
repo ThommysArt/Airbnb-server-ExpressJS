@@ -9,7 +9,7 @@ const hostsController = {
             res.json(hosts);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     getHostById: async (req, res) => {
@@ -24,7 +24,7 @@ const hostsController = {
             res.json(host);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     createHost: async (req, res) => {
@@ -38,7 +38,7 @@ const hostsController = {
             res.status(201).json(newHost);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     updateHost: async (req, res) => {
@@ -54,7 +54,7 @@ const hostsController = {
             res.json(updatedHost);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     deleteHost: async (req, res) => {
@@ -66,7 +66,7 @@ const hostsController = {
             res.json(deletedHost);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
 };

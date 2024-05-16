@@ -8,7 +8,7 @@ const listingAmenitiesController = {
       const listingAmenities = await prisma.listingAmenity.findMany();
       res.json(listingAmenities);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 
@@ -23,7 +23,7 @@ const listingAmenitiesController = {
       }
       res.json(listingAmenity);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 
@@ -39,7 +39,7 @@ const listingAmenitiesController = {
       });
       res.status(201).json(newListingAmenity);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 
@@ -57,7 +57,7 @@ const listingAmenitiesController = {
       });
       res.json(updatedListingAmenity);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 
@@ -69,7 +69,7 @@ const listingAmenitiesController = {
       });
       res.json(deletedListingAmenity);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 };

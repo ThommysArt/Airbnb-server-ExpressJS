@@ -9,7 +9,7 @@ const listingImagesController = {
             res.json(listingImages);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     getListingImageById: async (req, res) => {
@@ -24,7 +24,7 @@ const listingImagesController = {
             res.json(listingImage);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     createListingImage: async (req, res) => {
@@ -39,7 +39,7 @@ const listingImagesController = {
             res.status(201).json(newListingImage);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     updateListingImage: async (req, res) => {
@@ -56,7 +56,7 @@ const listingImagesController = {
             res.json(updatedListingImage);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     deleteListingImage: async (req, res) => {
@@ -68,7 +68,7 @@ const listingImagesController = {
             res.json(deletedListingImage);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
 };

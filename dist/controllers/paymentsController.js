@@ -9,7 +9,7 @@ const paymentsController = {
             res.json(payments);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     getPaymentById: async (req, res) => {
@@ -24,7 +24,7 @@ const paymentsController = {
             res.json(payment);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     createPayment: async (req, res) => {
@@ -41,7 +41,7 @@ const paymentsController = {
             res.status(201).json(newPayment);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     updatePayment: async (req, res) => {
@@ -60,7 +60,7 @@ const paymentsController = {
             res.json(updatedPayment);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     deletePayment: async (req, res) => {
@@ -72,7 +72,7 @@ const paymentsController = {
             res.json(deletedPayment);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
 };

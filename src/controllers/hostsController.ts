@@ -8,7 +8,7 @@ const hostsController = {
       const hosts = await prisma.host.findMany();
       res.json(hosts);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 
@@ -23,7 +23,7 @@ const hostsController = {
       }
       res.json(host);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 
@@ -37,7 +37,7 @@ const hostsController = {
       });
       res.status(201).json(newHost);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 
@@ -53,7 +53,7 @@ const hostsController = {
       });
       res.json(updatedHost);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 
@@ -65,7 +65,7 @@ const hostsController = {
       });
       res.json(deletedHost);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 };

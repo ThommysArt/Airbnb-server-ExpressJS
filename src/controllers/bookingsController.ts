@@ -8,7 +8,7 @@ const bookingsController = {
       const bookings = await prisma.booking.findMany();
       res.json(bookings);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 
@@ -23,7 +23,7 @@ const bookingsController = {
       }
       res.json(booking);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 
@@ -40,7 +40,7 @@ const bookingsController = {
       });
       res.status(201).json(newBooking);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 
@@ -59,7 +59,7 @@ const bookingsController = {
       });
       res.json(updatedBooking);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 
@@ -71,7 +71,7 @@ const bookingsController = {
       });
       res.json(deletedBooking);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 };

@@ -9,7 +9,7 @@ const listingsController = {
             res.json(listings);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     getListingById: async (req, res) => {
@@ -24,7 +24,7 @@ const listingsController = {
             res.json(listing);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     createListing: async (req, res) => {
@@ -43,7 +43,7 @@ const listingsController = {
             res.status(201).json(newListing);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     updateListing: async (req, res) => {
@@ -64,7 +64,7 @@ const listingsController = {
             res.json(updatedListing);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     deleteListing: async (req, res) => {
@@ -76,7 +76,7 @@ const listingsController = {
             res.json(deletedListing);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
 };

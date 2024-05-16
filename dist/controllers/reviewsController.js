@@ -9,7 +9,7 @@ const listingReviewsController = {
             res.json(listingReviews);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     getListingReviewById: async (req, res) => {
@@ -24,7 +24,7 @@ const listingReviewsController = {
             res.json(listingReview);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     createListingReview: async (req, res) => {
@@ -40,7 +40,7 @@ const listingReviewsController = {
             res.status(201).json(newListingReview);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     updateListingReview: async (req, res) => {
@@ -58,7 +58,7 @@ const listingReviewsController = {
             res.json(updatedListingReview);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     deleteListingReview: async (req, res) => {
@@ -70,7 +70,7 @@ const listingReviewsController = {
             res.json(deletedListingReview);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
 };
