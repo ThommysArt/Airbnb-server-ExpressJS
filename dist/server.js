@@ -25,7 +25,7 @@ app.use('/reviews', reviews_1.default);
 app.use('/payments', payments_1.default);
 app.use('/bookings', bookings_1.default);
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

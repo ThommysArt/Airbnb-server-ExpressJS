@@ -32,7 +32,7 @@ const usersController = {
         try {
             const newUser = await prisma.user.create({
                 data: {
-                    authCode: authCode
+                    authCode: authCode.toString(),
                 },
             });
             res.status(201).json(newUser);
