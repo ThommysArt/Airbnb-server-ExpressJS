@@ -28,11 +28,12 @@ const listingReviewsController = {
   },
 
   createListingReview: async (req: Request, res: Response) => {
-    const { listingId, rating, comment } = req.body;
+    const { listingId, userId, rating, comment } = req.body;
     try {
       const newListingReview = await prisma.listingReview.create({
         data: {
           listingId,
+          userId,
           rating,
           comment,
         },
