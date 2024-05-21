@@ -7,11 +7,13 @@ import imagesRouter from './routes/images';
 import reviewsRouter from './routes/reviews';
 import paymentsRouter from './routes/payments';
 import bookingsRouter from './routes/bookings';
+import cors from 'cors'
 
 const app = express();
 
 // Middleware
 app.use(express.json());
+app.use(cors())
 
 // Routes
 app.use('/users', usersRouter);
