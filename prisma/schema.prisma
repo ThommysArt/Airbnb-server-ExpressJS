@@ -19,6 +19,7 @@ model User {
   createdAt      DateTime        @default(now())
   hosts          Host[]
   payments       Payment[]
+  bookings       Booking[]
   listingReviews ListingReview[]
 }
 
@@ -89,4 +90,8 @@ model Booking {
   paymentId    Int
   checkInDate  DateTime
   checkOutDate DateTime
+  user         User     @relation(fields: [userId], references: [id])
+  userId       Int
+  guests       Int
+  prices       Float
 }
