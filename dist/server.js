@@ -12,9 +12,11 @@ const images_1 = __importDefault(require("./routes/images"));
 const reviews_1 = __importDefault(require("./routes/reviews"));
 const payments_1 = __importDefault(require("./routes/payments"));
 const bookings_1 = __importDefault(require("./routes/bookings"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 // Middleware
 app.use(express_1.default.json());
+app.use((0, cors_1.default)());
 // Routes
 app.use('/users', users_1.default);
 app.use('/hosts', hosts_1.default);
