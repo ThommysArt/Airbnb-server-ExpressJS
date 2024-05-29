@@ -16,14 +16,14 @@ app.use(express.json());
 app.use(cors())
 
 // Routes
-app.use('/users', usersRouter);
-app.use('/hosts', hostsRouter);
-app.use('/listings', listingsRouter);
-app.use('/amenities', amenitiesRouter);
-app.use('/images', imagesRouter);
-app.use('/reviews', reviewsRouter);
-app.use('/payments', paymentsRouter);
-app.use('/bookings', bookingsRouter);
+app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/hosts', hostsRouter);
+app.use('/api/v1/listings', listingsRouter);
+app.use('/api/v1/amenities', amenitiesRouter);
+app.use('/api/v1/images', imagesRouter);
+app.use('/api/v1/reviews', reviewsRouter);
+app.use('/api/v1/payments', paymentsRouter);
+app.use('/api/v1/bookings', bookingsRouter);
 
 // Start the server
 const PORT = process.env.PORT || 3080;
