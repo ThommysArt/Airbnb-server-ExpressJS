@@ -4,8 +4,13 @@ const prisma = new PrismaClient();
 
 const listingReviewsController = {
   getAllListingReviews: async (req: Request, res: Response) => {
+    const listingId = parseInt(req.params.listingId)
     try {
-      const listingReviews = await prisma.listingReview.findMany();
+      const listingReviews = await prisma.listingReview.findMany({
+        where: {
+          listingId: listingId
+        }
+      });
       res.json(listingReviews);
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' , message: error});

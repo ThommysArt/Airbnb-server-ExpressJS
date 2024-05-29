@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get('/', listingReviewsController.getAllListingReviews);
 router.get('/:id', listingReviewsController.getListingReviewById);
+router.get('/by-listing/:listingId', listingReviewsController.getListingReviewById);
 router.post('/', listingReviewsController.createListingReview);
 router.put('/:id', listingReviewsController.updateListingReview);
 router.delete('/:id', listingReviewsController.deleteListingReview);
