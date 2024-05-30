@@ -6,51 +6,55 @@ const usersController = {
   getAllUsers: async (req: Request, res: Response) => {
     try {
       const users = await prisma.user.findMany();
-      res.json(users);
+      if (!users) {
+        return res.status(404).json({ error: "No users found"})
+      }
+      return res.status(200).json(users);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' , message: error});
+      return res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 
   getUserById: async (req: Request, res: Response) => {
-    const userId = parseInt(req.params.id);
     try {
       const user = await prisma.user.findUnique({
-        where: { id: userId },
+        where: { id: req.body.id },
       });
       if (!user) {
         return res.status(404).json({ error: 'User not found' });
       }
-      res.json(user);
+      return res.status(200).json(user);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' , message: error});
+      return res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 
   createUser: async (req: Request, res: Response) => {
-    const { authCode } = req.body;
     try {
       const newUser = await prisma.user.create({
-        data: {
-          authCode: authCode.toString(),
-        },
+        data: req.body
       });
-      res.status(201).json(newUser);
+      if (!newUser) {
+        return res.status(404).json({ error: "Error creating user"})
+      }
+      return res.status(201).json(newUser);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' , message: error});
+      return res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 
 
   deleteUser: async (req: Request, res: Response) => {
-    const userId = parseInt(req.params.id);
     try {
       const deletedUser = await prisma.user.delete({
-        where: { id: userId },
+        where: { id: req.body.id },
       });
-      res.json(deletedUser);
+      if (!deletedUser) {
+        return res.status(404).json({ error: "User not found"})
+      }
+      return res.status(200).json(deletedUser);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' , message: error});
+      return res.status(500).json({ error: 'Internal server error' , message: error});
     }
   },
 };

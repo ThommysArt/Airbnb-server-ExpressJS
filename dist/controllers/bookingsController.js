@@ -3,76 +3,76 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 const bookingsController = {
-    getAllBookings: async (req, res) => {
+    getAllUserBookings: async (req, res) => {
         try {
-            const bookings = await prisma.booking.findMany();
-            res.json(bookings);
+            const bookings = await prisma.booking.findMany({
+                where: { userId: req.body.userId }
+            });
+            if (!bookings) {
+                return res.status(404).json({ error: "Bookings not found" });
+            }
+            return res.status(200).json(bookings);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     getBookingById: async (req, res) => {
-        const bookingId = parseInt(req.params.id);
         try {
             const booking = await prisma.booking.findUnique({
-                where: { id: bookingId },
+                where: { id: req.body.id },
             });
             if (!booking) {
                 return res.status(404).json({ error: 'Booking not found' });
             }
-            res.json(booking);
+            return res.status(200).json(booking);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     createBooking: async (req, res) => {
         const { listingId, paymentId, checkInDate, checkOutDate } = req.body;
         try {
             const newBooking = await prisma.booking.create({
-                data: {
-                    listingId,
-                    paymentId,
-                    checkInDate,
-                    checkOutDate,
-                },
+                data: req.body
             });
-            res.status(201).json(newBooking);
+            if (!newBooking) {
+                return res.status(400).json({ error: "Error creating booking" });
+            }
+            return res.status(201).json(newBooking);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     updateBooking: async (req, res) => {
-        const bookingId = parseInt(req.params.id);
-        const { listingId, paymentId, checkInDate, checkOutDate } = req.body;
         try {
             const updatedBooking = await prisma.booking.update({
-                where: { id: bookingId },
-                data: {
-                    listingId,
-                    paymentId,
-                    checkInDate,
-                    checkOutDate,
-                },
+                where: { id: req.body.id },
+                data: req.body
             });
-            res.json(updatedBooking);
+            if (!updatedBooking) {
+                return res.status(404).json({ error: "Booking not found" });
+            }
+            return res.status(200).json(updatedBooking);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     deleteBooking: async (req, res) => {
-        const bookingId = parseInt(req.params.id);
         try {
             const deletedBooking = await prisma.booking.delete({
-                where: { id: bookingId },
+                where: { id: req.body.id },
             });
-            res.json(deletedBooking);
+            if (!deletedBooking) {
+                return res.status(404).json({ error: "Booking not found" });
+            }
+            return res.status(200).json(deletedBooking);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
 };

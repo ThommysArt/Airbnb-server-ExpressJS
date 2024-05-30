@@ -3,10 +3,10 @@ import bookingsController from '../controllers/bookingsController';
 
 const router = express.Router();
 
-router.get('/', bookingsController.getAllBookings);
-router.get('/:id', bookingsController.getBookingById);
+router.get('/all', bookingsController.getAllUserBookings);
+router.get('/', bookingsController.getBookingById);
 router.post('/', bookingsController.createBooking);
-router.put('/:id', bookingsController.updateBooking);
-router.delete('/:id', bookingsController.deleteBooking);
+router.put('/', bookingsController.updateBooking);
+router.delete('/', bookingsController.deleteBooking);
 
 export default router;

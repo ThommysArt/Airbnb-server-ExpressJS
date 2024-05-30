@@ -3,10 +3,10 @@ import listingImagesController from '../controllers/imagesController';
 
 const router = express.Router();
 
-router.get('/', listingImagesController.getAllListingImages);
-router.get('/:id', listingImagesController.getListingImageById);
+router.get('/all', listingImagesController.getAllListingImages);
+router.get('/', listingImagesController.getListingImageById);
 router.post('/', listingImagesController.createListingImage);
-router.put('/:id', listingImagesController.updateListingImage);
-router.delete('/:id', listingImagesController.deleteListingImage);
+router.put('/', listingImagesController.updateListingImage);
+router.delete('/', listingImagesController.deleteListingImage);
 
 export default router;

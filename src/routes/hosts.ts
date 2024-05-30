@@ -3,10 +3,10 @@ import hostsController from '../controllers/hostsController';
 
 const router = express.Router();
 
-router.get('/', hostsController.getAllHosts);
-router.get('/:id', hostsController.getHostById);
+router.get('/all', hostsController.getAllHosts);
+router.get('/', hostsController.getHostById);
 router.post('/', hostsController.createHost);
-router.put('/:id', hostsController.updateHost);
-router.delete('/:id', hostsController.deleteHost);
+router.put('/', hostsController.updateHost);
+router.delete('/', hostsController.deleteHost);
 
 export default router;

@@ -3,10 +3,10 @@ import listingsController from '../controllers/listingsController';
 
 const router = express.Router();
 
-router.get('/', listingsController.getAllListings);
-router.get('/:id', listingsController.getListingById);
+router.get('/all', listingsController.getAllListings);
+router.get('/', listingsController.getListingById);
 router.post('/', listingsController.createListing);
-router.put('/:id', listingsController.updateListing);
-router.delete('/:id', listingsController.deleteListing);
+router.put('/', listingsController.updateListing);
+router.delete('/', listingsController.deleteListing);
 
 export default router;

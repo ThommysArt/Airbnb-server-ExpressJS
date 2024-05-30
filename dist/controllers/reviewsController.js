@@ -5,73 +5,91 @@ const prisma = new client_1.PrismaClient();
 const listingReviewsController = {
     getAllListingReviews: async (req, res) => {
         try {
-            const listingReviews = await prisma.listingReview.findMany();
-            res.json(listingReviews);
+            const listingReviews = await prisma.listingReview.findMany({
+                where: {
+                    listingId: req.body.listingId
+                }
+            });
+            if (!listingReviews) {
+                return res.status(404).json({ error: "No listing review found" });
+            }
+            return res.status(200).json(listingReviews);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
+        }
+    },
+    getUserReviews: async (req, res) => {
+        try {
+            const listingReviews = await prisma.listingReview.findMany({
+                where: {
+                    userId: req.body.id
+                }
+            });
+            if (!listingReviews) {
+                return res.status(404).json({ error: "No User review found" });
+            }
+            return res.status(200).json(listingReviews);
+        }
+        catch (error) {
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     getListingReviewById: async (req, res) => {
-        const listingReviewId = parseInt(req.params.id);
         try {
             const listingReview = await prisma.listingReview.findUnique({
-                where: { id: listingReviewId },
+                where: { id: req.body.id },
             });
             if (!listingReview) {
                 return res.status(404).json({ error: 'Listing review not found' });
             }
-            res.json(listingReview);
+            return res.status(200).json(listingReview);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     createListingReview: async (req, res) => {
-        const { listingId, userId, rating, comment } = req.body;
         try {
             const newListingReview = await prisma.listingReview.create({
-                data: {
-                    listingId,
-                    userId,
-                    rating,
-                    comment,
-                },
+                data: req.body
             });
-            res.status(201).json(newListingReview);
+            if (!newListingReview) {
+                return res.status(404).json({ error: "Error creating Listing Review" });
+            }
+            return res.status(201).json(newListingReview);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     updateListingReview: async (req, res) => {
-        const listingReviewId = parseInt(req.params.id);
-        const { listingId, rating, comment } = req.body;
         try {
             const updatedListingReview = await prisma.listingReview.update({
-                where: { id: listingReviewId },
-                data: {
-                    listingId,
-                    rating,
-                    comment,
-                },
+                where: { id: req.body.id },
+                data: req.body
             });
-            res.json(updatedListingReview);
+            if (!updatedListingReview) {
+                return res.status(404).json({ error: "Listing Review not found" });
+            }
+            return res.status(200).json(updatedListingReview);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     deleteListingReview: async (req, res) => {
-        const listingReviewId = parseInt(req.params.id);
         try {
             const deletedListingReview = await prisma.listingReview.delete({
-                where: { id: listingReviewId },
+                where: { id: req.body.id },
             });
-            res.json(deletedListingReview);
+            if (!deletedListingReview) {
+                return res.status(404).json({ error: "Listing review not found" });
+            }
+            return res.json(deletedListingReview);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
 };

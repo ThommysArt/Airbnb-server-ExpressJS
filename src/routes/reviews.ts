@@ -3,11 +3,11 @@ import listingReviewsController from '../controllers/reviewsController';
 
 const router = express.Router();
 
-router.get('/', listingReviewsController.getAllListingReviews);
-router.get('/:id', listingReviewsController.getListingReviewById);
-router.get('/by-listing/:listingId', listingReviewsController.getListingReviewById);
+router.get('/all/', listingReviewsController.getAllListingReviews);
+router.get('/user', listingReviewsController.getUserReviews);
+router.get('/', listingReviewsController.getListingReviewById);
 router.post('/', listingReviewsController.createListingReview);
-router.put('/:id', listingReviewsController.updateListingReview);
-router.delete('/:id', listingReviewsController.deleteListingReview);
+router.put('/', listingReviewsController.updateListingReview);
+router.delete('/', listingReviewsController.deleteListingReview);
 
 export default router;

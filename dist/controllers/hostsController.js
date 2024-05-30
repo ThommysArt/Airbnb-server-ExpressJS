@@ -6,67 +6,74 @@ const hostsController = {
     getAllHosts: async (req, res) => {
         try {
             const hosts = await prisma.host.findMany();
-            res.json(hosts);
+            if (!hosts) {
+                return res.status(404).json({ error: "No hosts found" });
+            }
+            return res.status(200).json(hosts);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     getHostById: async (req, res) => {
-        const hostId = parseInt(req.params.id);
         try {
             const host = await prisma.host.findUnique({
-                where: { id: hostId },
+                where: { id: req.body.id },
             });
             if (!host) {
                 return res.status(404).json({ error: 'Host not found' });
             }
-            res.json(host);
+            return res.status(200).json(host);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     createHost: async (req, res) => {
-        const { userId } = req.body;
         try {
             const newHost = await prisma.host.create({
                 data: {
-                    userId,
+                    userId: req.body.userId
                 },
             });
-            res.status(201).json(newHost);
+            if (!newHost) {
+                return res.status(400).json({ error: "Failed to create host" });
+            }
+            return res.status(201).json(newHost);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     updateHost: async (req, res) => {
-        const hostId = parseInt(req.params.id);
-        const { userId } = req.body;
         try {
             const updatedHost = await prisma.host.update({
-                where: { id: hostId },
+                where: { id: req.body.id },
                 data: {
-                    userId,
+                    userId: req.body.userId,
                 },
             });
-            res.json(updatedHost);
+            if (!updatedHost) {
+                return res.status(404).json({ error: "Host not found" });
+            }
+            return res.status(200).json(updatedHost);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     deleteHost: async (req, res) => {
-        const hostId = parseInt(req.params.id);
         try {
             const deletedHost = await prisma.host.delete({
-                where: { id: hostId },
+                where: { id: req.body.id },
             });
-            res.json(deletedHost);
+            if (!deletedHost) {
+                return res.status(404).json({ error: "Host not found" });
+            }
+            return res.status(200).json(deletedHost);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
 };

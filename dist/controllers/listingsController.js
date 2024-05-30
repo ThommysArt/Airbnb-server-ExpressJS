@@ -6,77 +6,70 @@ const listingsController = {
     getAllListings: async (req, res) => {
         try {
             const listings = await prisma.listing.findMany();
-            res.json(listings);
+            if (!listings) {
+                return res.status(404).json({ error: "No listings found" });
+            }
+            return res.status(200).json(listings);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     getListingById: async (req, res) => {
-        const listingId = parseInt(req.params.id);
         try {
             const listing = await prisma.listing.findUnique({
-                where: { id: listingId },
+                where: { id: req.body.id },
             });
             if (!listing) {
                 return res.status(404).json({ error: 'Listing not found' });
             }
-            res.json(listing);
+            return res.status(200).json(listing);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     createListing: async (req, res) => {
-        const { title, date, description, location, price, hostId } = req.body;
         try {
             const newListing = await prisma.listing.create({
-                data: {
-                    title,
-                    date,
-                    description,
-                    location,
-                    price,
-                    hostId,
-                },
+                data: req.body
             });
-            res.status(201).json(newListing);
+            if (!newListing) {
+                return res.status(404).json({ error: "Error creating listing" });
+            }
+            return res.status(201).json(newListing);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     updateListing: async (req, res) => {
-        const listingId = parseInt(req.params.id);
-        const { title, date, description, location, price, hostId } = req.body;
         try {
             const updatedListing = await prisma.listing.update({
-                where: { id: listingId },
-                data: {
-                    title,
-                    date,
-                    description,
-                    location,
-                    price,
-                    hostId,
-                },
+                where: { id: req.body.id },
+                data: req.body
             });
-            res.json(updatedListing);
+            if (!updatedListing) {
+                return res.status(404).json({ error: "Listing not found" });
+            }
+            return res.status(200).json(updatedListing);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
     deleteListing: async (req, res) => {
-        const listingId = parseInt(req.params.id);
         try {
             const deletedListing = await prisma.listing.delete({
-                where: { id: listingId },
+                where: { id: req.body.id },
             });
-            res.json(deletedListing);
+            if (!deletedListing) {
+                return res.status(404).json({ error: "Listing not found" });
+            }
+            return res.status(200).json(deletedListing);
         }
         catch (error) {
-            res.status(500).json({ error: 'Internal server error', message: error });
+            return res.status(500).json({ error: 'Internal server error', message: error });
         }
     },
 };

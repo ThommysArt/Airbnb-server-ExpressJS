@@ -18,16 +18,16 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 // Routes
-app.use('/users', users_1.default);
-app.use('/hosts', hosts_1.default);
-app.use('/listings', listings_1.default);
-app.use('/amenities', amenities_1.default);
-app.use('/images', images_1.default);
-app.use('/reviews', reviews_1.default);
-app.use('/payments', payments_1.default);
-app.use('/bookings', bookings_1.default);
+app.use('/api/v1/users', users_1.default);
+app.use('/api/v1/hosts', hosts_1.default);
+app.use('/api/v1/listings', listings_1.default);
+app.use('/api/v1/amenities', amenities_1.default);
+app.use('/api/v1/images', images_1.default);
+app.use('/api/v1/reviews', reviews_1.default);
+app.use('/api/v1/payments', payments_1.default);
+app.use('/api/v1/bookings', bookings_1.default);
 // Start the server
-const PORT = process.env.PORT || 3080;
+const PORT = process.env.PORT || 3050;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
